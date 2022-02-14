@@ -33,12 +33,13 @@ export default class Movies extends Component {
         this.state.movie.map((movieObj) =>{
             return(
                 
-                <div className="card movie-card">
-                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`} style={{height:"40vh", width:"20vw"}} className="card-img-top moies-image" alt="..."/>
+                <div className="card movie-card" onMouseEnter={()=> this.setState({hover : movieObj.id})} onMouseLeave={()=> this.setState({hover: ""})}>
+                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}  className="card-img-top movie-img" alt="..."/>
                 {/* <div className="card-body movie-body"> */}
                   <h5 className="card-title movie-title">{movieObj.title}</h5>
                   <div className='button-wrapper' style={{display:"flex", width:"100%", justifyContent:"center"}}>
-                  <a href="#" className="btn btn-primary movie-button">Add to Favourites</a>
+                    { this.state.hover == movieObj.id &&  <a className="btn btn-primary movie-button">Add to Favourites</a>}
+                 
                 {/* </div> */}
                 </div>
               </div> 
