@@ -28,16 +28,18 @@ export default class Movies extends Component {
   <span className="visually-hidden">Loading...</span>
 </div> :
 <div>
-    <h3>Trending</h3>
-    <div>{
+    <h3 className='text-center'><strong>Trending</strong></h3>
+    <div className='movie-list'>{
         this.state.movie.map((movieObj) =>{
             return(
                 
-                <div>
-                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`} className="card-img-top moies-image" alt="..."/>
-                <div className="card-body">
-                  <h5 className="card-title">{movieObj.title}</h5>
-                  <a href="#" className="btn btn-primary">Go somewhere</a>
+                <div className="card movie-card">
+                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`} style={{height:"40vh", width:"20vw"}} className="card-img-top moies-image" alt="..."/>
+                {/* <div className="card-body movie-body"> */}
+                  <h5 className="card-title movie-title">{movieObj.title}</h5>
+                  <div className='button-wrapper' style={{display:"flex", width:"100%", justifyContent:"center"}}>
+                  <a href="#" className="btn btn-primary movie-button">Add to Favourites</a>
+                {/* </div> */}
                 </div>
               </div> 
             )
