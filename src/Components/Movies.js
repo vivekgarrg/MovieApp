@@ -24,8 +24,8 @@ export default class Movies extends Component {
       <>
 {
     this.state.movie.length == 0 ?
-    <div class="spinner-border" role="status">
-  <span class="visually-hidden">Loading...</span>
+    <div className="spinner-border" role="status">
+  <span className="visually-hidden">Loading...</span>
 </div> :
 <div>
     <h3>Trending</h3>
@@ -33,9 +33,8 @@ export default class Movies extends Component {
         this.state.movie.map((movieObj) =>{
             return(
                 
-                <div className="card">
-                    {console.log(movieObj)}
-                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`} className="card-img-top" alt="..."/>
+                <div>
+                <img src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`} className="card-img-top moies-image" alt="..."/>
                 <div className="card-body">
                   <h5 className="card-title">{movieObj.title}</h5>
                   <a href="#" className="btn btn-primary">Go somewhere</a>
