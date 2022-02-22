@@ -22,8 +22,6 @@ export default class Movies extends Component {
    }
 
    changeMovies=async()=>{
-     console.log("change movies is called")
-     console.log(this.state.parr);
     let res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=20b7dac373c2e985d153e16ebbc26ff8&language=en-US&page=${this.state.currentP}`)
     let data = res.data;
     this.setState({
@@ -48,6 +46,13 @@ handleLeft = () =>{
   this.setState({
     currentP : this.state.currentP -1
   },this.changeMovies)
+}
+}
+changePage = (value) =>{
+  if(value!=this.state.currentP){
+ this.setState({
+   currentP : value
+ },this.changeMovies)
 }
 }
   render() {
@@ -85,7 +90,7 @@ handleLeft = () =>{
     <li class="page-item"><a class="page-link" onClick={this.handleLeft}>Previous</a></li>
  {this.state.parr.map((value)=>{
        return(
-        <li class="page-item"><a class="page-link" href="#">{value}</a></li>
+        <li class="page-item"><a class="page-link" onClick={()=> this.changePage(value)}>{value}</a></li>
        )
  })}
     <li class="page-item"><a class="page-link" onClick={this.handleRight}>Next</a></li>
