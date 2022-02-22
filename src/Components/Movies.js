@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios';
+import { findRenderedDOMComponentWithClass } from 'react-dom/cjs/react-dom-test-utils.production.min';
 
 export default class Movies extends Component {
     constructor(){
@@ -19,6 +20,36 @@ export default class Movies extends Component {
          movie : [...data.results]
      })
    }
+
+   changeMovies=async()=>{
+     console.log("change movies is called")
+     console.log(this.state.parr);
+    let res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=20b7dac373c2e985d153e16ebbc26ff8&language=en-US&page=${this.state.currentP}`)
+    let data = res.data;
+    this.setState({
+    movie : [...data.results]
+  })
+   
+}
+
+handleRight = () =>{
+  let temp = []
+  for(let i=1; i<=this.state.parr.length+1; i++)
+  {
+    temp.push(i);
+  }
+  this.setState({
+    parr: [...temp],
+    currentP : this.state.currentP+1
+  },this.changeMovies)
+}
+handleLeft = () =>{
+  if(this.state.currentP!=1){
+  this.setState({
+    currentP : this.state.currentP -1
+  },this.changeMovies)
+}
+}
   render() {
     return (
       <>
@@ -51,13 +82,13 @@ export default class Movies extends Component {
 <div style={{display:'flex',justifyContent:'center'}}>
 <nav aria-label="Page navigation example">
   <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+    <li class="page-item"><a class="page-link" onClick={this.handleLeft}>Previous</a></li>
  {this.state.parr.map((value)=>{
        return(
         <li class="page-item"><a class="page-link" href="#">{value}</a></li>
        )
  })}
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    <li class="page-item"><a class="page-link" onClick={this.handleRight}>Next</a></li>
   </ul>
 </nav>
 </div>
