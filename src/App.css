@@ -85,6 +85,14 @@
   width: 20vw;
 }
 
+.favourites-generes{
+  padding: 3rem;
+}
+.favourites-table
+{
+  padding: 3rem;
+}
+
 @media screen and (max-width:400px){
   .banner-card{
     height: 30vh;
@@ -110,6 +118,7 @@
   .movie-img{
     width: 40vw;
   }
+  
 }
 @keyframes App-logo-spin {
   from {
