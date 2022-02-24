@@ -9,6 +9,10 @@ export default class Favourite extends Component {
         }
     }
   render() {
+    const oldData =   JSON.parse(localStorage.getItem('movies-app')||'[]')
+      let temp = oldData.map((movie)=>{
+          console.log(movie)
+      })
     return (
       <>
       <div className='main'>
@@ -29,31 +33,25 @@ export default class Favourite extends Component {
                         <table class="table">
   <thead>
     <tr>
+      <th scope="col"></th>
       <th scope="col">Title</th>
-      <th scope="col">Genres</th>
       <th scope="col">Popularity</th>
       <th scope="col">Rating</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
+      {oldData.map((movieObj)=>{
+          return(
+            <tr>
+            <th scope="row"><img style={{width:100}} src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}/></th>
+            <td><b>{movieObj.title}</b></td>
+            <td>{movieObj.popularity}</td>
+            <td>{movieObj.vote_average}</td>
+            <td><button className='btn btn-danger'>Delete</button></td>
+          </tr>
+          )
+      })}
   </tbody>
 </table>
 

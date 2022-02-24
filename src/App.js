@@ -13,7 +13,6 @@ function App() {
     <Routes>
     <Route exact path='/' element={<><Banner/><Movies/></>}/>
     <Route exact path='/favourite' element={<Favourite/>}/>
-
     </Routes>
     </Router>
     </>
