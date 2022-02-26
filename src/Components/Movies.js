@@ -95,7 +95,7 @@ handleFavouriteState = () =>{
                 {/* <div className="card-body movie-body"> */}
                   <h5 className="card-title movie-title">{movieObj.title}</h5>
                   <div className='button-wrapper' style={{display:"flex", width:"100%", justifyContent:"center"}}>
-                    { this.state.hover == movieObj.id &&  <a className="btn btn-primary movie-button" onClick={()=>this.handleFavourite(movieObj)}>{this.state.favourites.includes(movieObj.id)?"Remove":"Add"}</a>}
+                    { this.state.hover == movieObj.id &&  <a className="btn btn-primary movie-button" onClick={()=>this.handleFavourite(movieObj)}>{this.state.favourites.includes(movieObj.id)?"Remove from Favourites":"Add to Favourites"}</a>}
                  
                 {/* </div> */}
                 </div>

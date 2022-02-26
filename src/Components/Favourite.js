@@ -5,43 +5,70 @@ export default class Favourite extends Component {
     {
         super()
         this.state = {
-            genres:[]
+            movies:[],
+            currText:''
         }
     }
-  render() {
-    const oldData =   JSON.parse(localStorage.getItem('movies-app')||'[]')
-      let temp = oldData.map((movie)=>{
-          console.log(movie)
+    popularityAsc=()=>{
+      let temp = this.state.movies;
+
+      temp.sort(function(objA, objB){
+         return objA.popularity-objB.popularity
       })
+
+    this.setState({
+    movies:[...temp]
+   })
+ }
+ RatingAsc=()=>{
+  let temp = this.state.movies;
+
+  temp.sort(function(objA, objB){
+     return objA.vote_average-objB.vote_average
+  })
+
+this.setState({
+movies:[...temp]
+})
+ }
+    componentDidMount()
+    {
+        this.setState({
+        movies:JSON.parse(localStorage.getItem('movies-app')||'[]')
+        })
+    }
+  render() {
+    let filterArr = []
+   if(this.state.currText == '')
+   {
+       filterArr=this.state.movies;
+   }else{
+     filterArr=this.state.movies.filter((movieObj)=>
+     {
+       let title =movieObj.original_title.toLowerCase();
+       return title.includes(this.state.currText.toLowerCase())
+     })
+   }
+   console.log(filterArr)
     return (
       <>
       <div className='main'>
-            <div className='row'>
-                <div className='col-3'>
-             <ul class="list-group favourites-generes">
-             <li className="list-group-item">All Genres</li>
-             <li className="list-group-item">item</li>
-             <li className="list-group-item">A third item</li>
-             <li className="list-group-item">A fourth item</li>
-             <li className="list-group-item">And a fifth one</li>
-             </ul>
-
-                </div>
-                <div className='col-9'>
+            <div className='row'>   
+                <div className='col'>
                     <div className='row favourites-table'>
-                        <input type='text' className='col input-group-text'/> <input type='text' className='col input-group-text'/>
-                        <table class="table">
+                        <input placeholder='Search ' type='text' className='col input-group-text' value={this.state.currText} onChange={(e)=>this.setState({currText:e.target.value})}/> 
+                                                <table class="table">
   <thead>
     <tr>
       <th scope="col"></th>
       <th scope="col">Title</th>
-      <th scope="col">Popularity</th>
-      <th scope="col">Rating</th>
+      <th scope="col" onClick={this.popularityAsc} >Popularity</th>
+      <th scope="col" onClick={this.RatingAsc}>Rating</th>
       <th scope="col">Delete</th>
     </tr>
   </thead>
   <tbody>
-      {oldData.map((movieObj)=>{
+      {filterArr.map((movieObj)=>{
           return(
             <tr>
             <th scope="row"><img style={{width:100}} src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}/></th>
@@ -55,16 +82,6 @@ export default class Favourite extends Component {
   </tbody>
 </table>
 
-
-<nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-  </ul>
-</nav>
                     </div>
                 </div>
             </div>
