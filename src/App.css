@@ -92,7 +92,36 @@
 {
   padding: 3rem;
 }
-
+.logo{
+  margin-left: 10px;
+text-decoration: none;
+color: darkred;
+}
+.logo:hover{
+  color: red;
+}
+.fav{
+  margin-left: 40px;
+  text-decoration: none;
+  color: darkblue;
+}
+.banner{
+  background-color: black;
+}
+.text-center{
+  color: white;
+}
+.btn{
+  background-color: #F76300;
+  border-color: #F76300;
+}
+.btn:hover{
+  background-color: #F76300;
+  border-color: #F76300;
+}
+.text-col{
+  color: white;
+}
 @media screen and (max-width:400px){
   .banner-card{
     height: 30vh;

@@ -19,7 +19,7 @@ export default class Banner extends Component {
   render() {
     return (
         
-      <div >
+      <div className='banner' >
        { this.state.movie.length == 0 ? <div className="spinner-border" role="status">
   <span className="visually-hidden">Loading...</span>
 </div>   :

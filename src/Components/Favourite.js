@@ -9,7 +9,7 @@ export default class Favourite extends Component {
             currText:''
         }
     }
-    popularityAsc=()=>{
+  popularityAsc=()=>{
       let temp = this.state.movies;
 
       temp.sort(function(objA, objB){
@@ -18,20 +18,27 @@ export default class Favourite extends Component {
 
     this.setState({
     movies:[...temp]
-   })
- }
- RatingAsc=()=>{
-  let temp = this.state.movies;
+     })
+       }
+  RatingAsc=()=>
+    {
+       let temp = this.state.movies;
+       temp.sort(function(objA, objB){
+       return objA.vote_average-objB.vote_average
+       })
 
-  temp.sort(function(objA, objB){
-     return objA.vote_average-objB.vote_average
-  })
-
-this.setState({
-movies:[...temp]
-})
- }
-    componentDidMount()
+        this.setState({
+          movies:[...temp]
+           })
+   }
+   movieDelete=(id)=>{
+     let temp = this.state.movies.filter((movieObj)=>movieObj.id!=id)
+     this.setState({
+       movies:[...temp]
+     })
+     localStorage.setItem("movies-app",JSON.stringify(temp));
+   }
+  componentDidMount()
     {
         this.setState({
         movies:JSON.parse(localStorage.getItem('movies-app')||'[]')
@@ -61,10 +68,10 @@ movies:[...temp]
   <thead>
     <tr>
       <th scope="col"></th>
-      <th scope="col">Title</th>
-      <th scope="col" onClick={this.popularityAsc} >Popularity</th>
-      <th scope="col" onClick={this.RatingAsc}>Rating</th>
-      <th scope="col">Delete</th>
+      <th scope="col" className='text-col'>Title</th>
+      <th scope="col" className='text-col' onClick={this.popularityAsc} >Popularity</th>
+      <th scope="col" className='text-col' onClick={this.RatingAsc}>Rating</th>
+      <th scope="col" className='text-col'>Delete</th>
     </tr>
   </thead>
   <tbody>
@@ -72,10 +79,10 @@ movies:[...temp]
           return(
             <tr>
             <th scope="row"><img style={{width:100}} src={`https://image.tmdb.org/t/p/original/${movieObj.backdrop_path}`}/></th>
-            <td><b>{movieObj.title}</b></td>
-            <td>{movieObj.popularity}</td>
-            <td>{movieObj.vote_average}</td>
-            <td><button className='btn btn-danger'>Delete</button></td>
+            <td className='text-col'><b>{movieObj.title}</b></td>
+            <td className='text-col'>{movieObj.popularity}</td>
+            <td className='text-col'>{movieObj.vote_average}</td>
+            <td><button className='btn btn-danger' onClick={()=>this.movieDelete(movieObj.id)}>Delete</button></td>
           </tr>
           )
       })}
